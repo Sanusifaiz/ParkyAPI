@@ -14,6 +14,6 @@ namespace ParkyAPI.Models
         }
 
         // to add any model to the database "DbContext" u need to make an entry
-        public DbSet<NationalParkDto> NationalPark { get; set; }
+        public DbSet<NationalPark> NationalPark { get; set; }
     }
 }
