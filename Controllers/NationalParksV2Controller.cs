@@ -18,7 +18,7 @@ namespace ParkyAPI.Controllers
     [ApiController]
   //  [ApiExplorerSettings(GroupName = "ParkyOpenAPISpecNP")]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public class NationalParkV2Controller : Controller
+    public class NationalParkV2Controller : ControllerBase
     {
         private readonly INationalParkRepository _npRepo;
         private readonly IMapper _mapper;

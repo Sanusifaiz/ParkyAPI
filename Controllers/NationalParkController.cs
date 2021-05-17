@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ParkyAPI.Controllers
 {
@@ -16,7 +17,7 @@ namespace ParkyAPI.Controllers
     [ApiController]
   //  [ApiExplorerSettings(GroupName = "ParkyOpenAPISpecNP")]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public class NationalParkController : Controller
+    public class NationalParkController : ControllerBase    //ControllerBase instead of Controller because no views support
     {
         private readonly INationalParkRepository _npRepo;
         private readonly IMapper _mapper;
@@ -60,15 +61,16 @@ namespace ParkyAPI.Controllers
         [ProducesResponseType(200, Type = typeof(NationalParkDto))]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
+        [Authorize]
         [ProducesDefaultResponseType]
         public IActionResult GetNationalPark(int nationalParkId)
         {
             var obj = _npRepo.GetNationalPark(nationalParkId);
            if(obj == null)
-            {
+           {
                 return NotFound();
-            }
-              var objDto = _mapper.Map<NationalParkDto>(obj);
+           }
+           var objDto = _mapper.Map<NationalParkDto>(obj);
 
             //var objDto = new NationalParkDto()
             //{
